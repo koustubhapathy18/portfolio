@@ -21,6 +21,7 @@ export function Hero() {
             <Scene />
 
             <motion.div style={{ y, opacity }} className="z-10 container mx-auto px-4 text-center pointer-events-none">
+
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

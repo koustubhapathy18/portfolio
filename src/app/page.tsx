@@ -3,6 +3,7 @@ import { About } from "@/components/features/about";
 import { Skills } from "@/components/features/skills";
 import { Experience } from "@/components/features/experience";
 import { Projects } from "@/components/features/projects";
+import { Education } from "@/components/features/education";
 import { Contact } from "@/components/features/contact";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center w-full">
       <Hero />
       <About />
+      <Education />
       <Skills />
       <Experience />
       <Projects />
