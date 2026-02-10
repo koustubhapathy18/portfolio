@@ -102,12 +102,12 @@ export function Education() {
                                         ${item.current ? "border-primary/40 bg-primary/5" : ""}
                                     `}>
 
-                                        <div className="flex flex-wrap gap-3 text-sm text-primary mb-2 font-medium">
-                                            <span className="flex items-center gap-1 bg-primary/10 px-2 py-1 rounded-md">
+                                        <div className="flex flex-wrap md:flex-nowrap gap-2 text-sm text-primary mb-2 font-medium">
+                                            <span className="flex items-center gap-1 bg-primary/10 px-2 py-1 rounded-md whitespace-nowrap">
                                                 <Calendar className="w-3 h-3" />
                                                 {item.period}
                                             </span>
-                                            <span className="flex items-center gap-1 bg-primary/10 px-2 py-1 rounded-md">
+                                            <span className="flex items-center gap-1 bg-primary/10 px-2 py-1 rounded-md whitespace-nowrap">
                                                 <MapPin className="w-3 h-3" />
                                                 {item.location}
                                             </span>
