@@ -28,7 +28,7 @@ const educationData = [
     },
     {
         degree: "Schooling (10th)",
-        major: "General Stickies",
+        major: "General Studies",
         institution: "Kendriya Vidyalaya Digapahandi",
         location: "Digapahandi, Odisha",
         period: "Mar 2013 - Mar 2022",
