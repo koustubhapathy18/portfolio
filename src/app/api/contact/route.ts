@@ -17,9 +17,6 @@ const ipRequestMap = new Map<string, { count: number; lastRequest: number }>();
 
 export async function POST(req: Request) {
     try {
-        // Debug Logging
-        console.log("Contact API: Starting email send process...");
-
         // 1. IP Rate Limiting (Basic)
         const ip = req.headers.get("x-forwarded-for") || "unknown";
         const now = Date.now();
@@ -27,7 +24,6 @@ export async function POST(req: Request) {
 
         if (now - clientData.lastRequest < RATE_LIMIT_WINDOW) {
             if (clientData.count >= RATE_LIMIT_MAX_REQUESTS) {
-                console.log(`Contact API: Rate limit exceeded for IP ${ip}`);
                 return NextResponse.json(
                     { success: false, message: "Too many requests. Please try again later." },
                     { status: 429 }
@@ -45,7 +41,6 @@ export async function POST(req: Request) {
         const validationResult = contactSchema.safeParse(body);
 
         if (!validationResult.success) {
-            console.log("Contact API: Validation error", validationResult.error.format());
             return NextResponse.json(
                 {
                     success: false,
@@ -58,7 +53,8 @@ export async function POST(req: Request) {
 
         const { name, email, subject, message } = validationResult.data;
 
-        // Debug Env Vars
+        // Debug Logging
+        console.log("Contact API: Starting email send process...");
         console.log("Contact API: Env vars check - User:", process.env.EMAIL_USER ? "Defined" : "Missing", ", Pass:", process.env.EMAIL_PASS ? "Defined" : "Missing");
 
         // 3. Configure Nodemailer Transporter
@@ -90,13 +86,7 @@ export async function POST(req: Request) {
       `,
         };
 
-        try {
-            await transporter.sendMail(mailOptions);
-            console.log("Contact API: Email sent successfully");
-        } catch (mailError: any) {
-            console.error("Contact API: Nodemailer sendMail failed:", mailError);
-            throw mailError;
-        }
+        await transporter.sendMail(mailOptions);
 
         return NextResponse.json(
             { success: true, message: "Email sent successfully!" },
