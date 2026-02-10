@@ -13,7 +13,7 @@ interface StarsProps {
 
 function Stars({ theme, ...props }: StarsProps) {
     const ref = useRef<THREE.Points>(null)
-    const sphere = useMemo(() => random.inSphere(new Float32Array(5001), { radius: 1.5 }), [])
+    const sphere = useMemo(() => random.inSphere(new Float32Array(5001), { radius: 1.5 }) as Float32Array, [])
 
     // Ref to track cumulative auto-rotation
     const autoRot = useRef({ x: 0, y: 0 })
