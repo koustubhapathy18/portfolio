@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, MessageSquare, Send, FileText, ArrowDown } from "lucide-react"
+import { Mail, MessageSquare, Send, FileText, ArrowDown, Copy, Check } from "lucide-react"
 
 export function Contact() {
     const [formData, setFormData] = useState({
@@ -17,10 +17,17 @@ export function Contact() {
     })
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
     const [errorMessage, setErrorMessage] = useState("")
+    const [isCopied, setIsCopied] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
         setFormData((prev) => ({ ...prev, [name]: value }))
+    }
+
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText("koustubhapathyofficial@gmail.com")
+        setIsCopied(true)
+        setTimeout(() => setIsCopied(false), 2000)
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -84,9 +91,19 @@ export function Contact() {
                                 <div className="bg-primary/10 p-3 rounded-full">
                                     <Mail className="h-6 w-6 text-primary" />
                                 </div>
-                                <div>
+                                <div className="flex-1">
                                     <p className="text-sm text-muted-foreground">Email</p>
-                                    <p className="font-medium">koustubhapathyofficial@gmail.com</p>
+                                    <div className="flex items-center gap-2">
+                                        <p className="font-medium">koustubhapathyofficial@gmail.com</p>
+                                        <button
+                                            onClick={handleCopyEmail}
+                                            className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-muted-foreground hover:text-white"
+                                            title="Copy email address"
+                                        >
+                                            {isCopied ? <Check size={14} className="text-green-400" /> : <Copy size={14} />}
+                                        </button>
+                                        {isCopied && <span className="text-xs text-green-400 animate-in fade-in zoom-in">Copied!</span>}
+                                    </div>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-4">
