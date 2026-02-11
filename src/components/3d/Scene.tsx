@@ -7,8 +7,29 @@ import * as random from "maath/random/dist/maath-random.cjs"
 import { useTheme } from "next-themes"
 import * as THREE from "three"
 
-interface StarsProps {
-    theme?: string;
+// Realistic Star Colors (Spectral Classes)
+const starColors = [
+    new THREE.Color("#9bb0ff"), // O - Blue
+    new THREE.Color("#aabfff"), // B - Blue-White
+    new THREE.Color("#cad7ff"), // A - White
+    new THREE.Color("#f8f7ff"), // F - Yellow-White
+    new THREE.Color("#fff4ea"), // G - Yellow
+    new THREE.Color("#ffd2a1"), // K - Orange
+    new THREE.Color("#ffcc6f"), // M - Red
+]
+
+function generateColoredStars(count: number, radius: number) {
+    const positions = random.inSphere(new Float32Array(count * 3), { radius }) as Float32Array
+    const colors = new Float32Array(count * 3)
+
+    for (let i = 0; i < count; i++) {
+        const color = starColors[Math.floor(Math.random() * starColors.length)]
+        colors[i * 3] = color.r
+        colors[i * 3 + 1] = color.g
+        colors[i * 3 + 2] = color.b
+    }
+
+    return { positions, colors }
 }
 
 function ShootingStar() {
@@ -48,73 +69,69 @@ function ShootingStar() {
     )
 }
 
-function Stars({ theme, ...props }: StarsProps) {
+interface StarsProps {
+    theme?: string;
+}
+
+function Stars({ theme }: StarsProps) {
     const ref = useRef<THREE.Group>(null)
 
-    // Layer 1: Dense, fine background stars (The "Dust")
-    // 15000 is divisible by 3
-    const sphere1 = useMemo(() => random.inSphere(new Float32Array(15000), { radius: 3 }) as Float32Array, [])
+    // Layer 1: Dense faint background (High density for depth)
+    const dust = useMemo(() => generateColoredStars(8000, 6), [])
 
-    // Layer 2: Medium stars for depth
-    // 5001 is divisible by 3 (1667 * 3)
-    const sphere2 = useMemo(() => random.inSphere(new Float32Array(5001), { radius: 2.5 }) as Float32Array, [])
+    // Layer 2: Medium Stars
+    const stars = useMemo(() => generateColoredStars(3000, 4), [])
 
-    // Layer 3: Sparse, bright foreground stars (The "Gems")
-    // 801 is divisible by 3 (267 * 3)
-    const sphere3 = useMemo(() => random.inSphere(new Float32Array(801), { radius: 1.8 }) as Float32Array, [])
+    // Layer 3: Bright Gems
+    const gems = useMemo(() => generateColoredStars(500, 2.5), [])
 
-    // Ref to track cumulative auto-rotation
     const autoRot = useRef({ x: 0, y: 0 })
 
     useFrame((state, delta) => {
         if (ref.current) {
-            // Majestic, slow rotation
-            autoRot.current.x -= delta / 60
-            autoRot.current.y -= delta / 80
+            autoRot.current.x -= delta / 50 // Faster rotation (was 100)
+            autoRot.current.y -= delta / 60 // Faster rotation (was 120)
 
-            // Apply combined rotation: Auto + Mouse Influence
-            // Reduced mouse sensitivity for "heavy space" feel
-            ref.current.rotation.x = autoRot.current.x + state.pointer.y * 0.05
-            ref.current.rotation.y = autoRot.current.y + state.pointer.x * 0.05
+            // Multiplier for mouse movement (parallax)
+            ref.current.rotation.x = autoRot.current.x + state.pointer.y * 0.05 // increased parallax
+            ref.current.rotation.y = autoRot.current.y + state.pointer.x * 0.05 // increased parallax
         }
     })
-
-    const baseColor = theme === 'dark' ? "#ffffff" : "#4f46e5"
 
     return (
         <group rotation={[0, 0, Math.PI / 4]} ref={ref}>
             {/* Background Dust */}
-            <Points positions={sphere1} stride={3} frustumCulled={false} {...props}>
+            <Points positions={dust.positions} colors={dust.colors} stride={3} frustumCulled={false}>
                 <PointMaterial
                     transparent
-                    color={baseColor}
-                    size={0.002}
+                    vertexColors
+                    size={0.003} // Sharp and small
                     sizeAttenuation={true}
                     depthWrite={false}
-                    opacity={0.3}
+                    opacity={0.4}
                     blending={THREE.AdditiveBlending}
                 />
             </Points>
 
-            {/* Middle Layer */}
-            <Points positions={sphere2} stride={3} frustumCulled={false} {...props}>
+            {/* Medium Layer */}
+            <Points positions={stars.positions} colors={stars.colors} stride={3} frustumCulled={false}>
                 <PointMaterial
                     transparent
-                    color={baseColor}
-                    size={0.004}
+                    vertexColors
+                    size={0.006}
                     sizeAttenuation={true}
                     depthWrite={false}
-                    opacity={0.6}
+                    opacity={0.7}
                     blending={THREE.AdditiveBlending}
                 />
             </Points>
 
-            {/* Foreground Stars */}
-            <Points positions={sphere3} stride={3} frustumCulled={false} {...props}>
+            {/* Bright Gems */}
+            <Points positions={gems.positions} colors={gems.colors} stride={3} frustumCulled={false}>
                 <PointMaterial
                     transparent
-                    color={baseColor}
-                    size={0.008} // Significantly larger
+                    vertexColors
+                    size={0.012} // Sharp bright points
                     sizeAttenuation={true}
                     depthWrite={false}
                     opacity={0.9}
@@ -128,12 +145,16 @@ function Stars({ theme, ...props }: StarsProps) {
 export function Scene() {
     const { theme } = useTheme()
     return (
-        <div className="absolute inset-0 -z-10 h-full w-full">
+        <div className="absolute inset-0 -z-10 h-full w-full bg-black">
+            {/* Deep gradient background for extra depth overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-[#050510] to-black opacity-90" />
+
             <Canvas camera={{ position: [0, 0, 1] }}>
                 <Stars theme={theme} />
                 <ShootingStar />
                 <ShootingStar />
-                <ShootingStar />
+
+                <ambientLight intensity={0.1} />
             </Canvas>
         </div>
     )
