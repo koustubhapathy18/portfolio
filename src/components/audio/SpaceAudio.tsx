@@ -301,10 +301,10 @@ export function SpaceAudio() {
     }
 
     return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2 group">
+        <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start gap-2 group">
             <div className={`
                 bg-black/40 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs text-white/70 
-                flex items-center gap-2 transition-all duration-500 mb-1
+                flex items-center gap-2 transition-all duration-500 mb-1 pointer-events-none
                 ${!hasInteracted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0'}
             `}>
                 <Headphones size={12} />

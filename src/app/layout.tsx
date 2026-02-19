@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/common/SmoothScroll";
 import { ScrollProgress } from "@/components/common/ScrollProgress";
 import { CustomCursor } from "@/components/common/CustomCursor";
+import { AIAssistant } from "@/components/ai/AIAssistant";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,6 +67,7 @@ export default function RootLayout({
           <SmoothScroll>
             <ScrollProgress />
             <CustomCursor />
+            <AIAssistant />
             <div className="flex flex-col min-h-screen">
               <Navbar />
               <main className="flex-grow pt-16">

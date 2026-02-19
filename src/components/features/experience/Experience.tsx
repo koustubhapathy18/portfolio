@@ -34,8 +34,8 @@ export function Experience() {
                             <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl -z-10" />
                             <div className="md:grid md:grid-cols-5 md:gap-8 relative z-10">
                                 <div className="md:col-span-2 md:text-right md:pr-8 mb-2 md:mb-0 relative">
-                                    <div className="absolute top-2 -left-[41px] md:left-auto md:-right-[33px] w-6 h-6 rounded-full border-4 border-background bg-primary z-10 shadow-[0_0_10px_rgba(var(--primary),0.5)] group-hover:scale-125 transition-transform duration-300" />
-                                    <div className="absolute top-2 -left-[41px] md:left-auto md:-right-[33px] w-6 h-6 rounded-full bg-primary animate-ping opacity-20" />
+                                    <div className="absolute top-0 -left-[41px] md:left-auto md:-right-[24px] w-6 h-6 rounded-full border-4 border-background bg-primary z-10 shadow-[0_0_10px_rgba(var(--primary),0.5)] group-hover:scale-125 transition-transform duration-300" />
+                                    <div className="absolute top-0 -left-[41px] md:left-auto md:-right-[24px] w-6 h-6 rounded-full bg-primary animate-ping opacity-20" />
                                     <p className="text-sm font-medium text-muted-foreground">{item.period}</p>
                                     <h4 className="font-bold text-lg md:hidden">{item.company}</h4>
                                 </div>

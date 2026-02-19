@@ -1,0 +1,68 @@
+Koustubha Pathy
+https://www.linkedin.com/in/koustubha-pathy/
+
+Email : koustubhapathyofficial@gmail.com
+Mobile : 8260727393
+
+Education
+•
+
+NIST UNIVERSITY, Berhampur
+
+Berhampur, Odisha
+
+B.Tech in Computer Science; CGPA: 8.3
+
+2024 - 2028
+
+Experience
+•
+
+Nist University
+Berhampur
+
+Berhampur, Odisha
+2025 - Present
+
+◦ IoT and Mechatronics Intern, NIST University, Berhampur, Odisha: Gained hands-on experience
+working with Arduino UNO and Arduino IDE, building and testing electronic prototypes. Learned 3D-printing
+design, stencil preparation, and model development for hardware enclosures. Developed an ECG-Integrated Smart
+Health Console using Arduino UNO R4, ECG sensor, and OLED display. The system captures real-time heart
+signals, processes ECG data, and displays heart rate and waveform on the OLED screen. Built for continuous
+health monitoring, the project showcases skills in embedded systems, hardware integration, signal processing, and
+IoT-based health solutions.
+◦ Linux: Completed hands-on learning in Linux, gaining practical experience with command-line operations, file
+system navigation, user management, and permissions. Explored essential Linux commands, shell scripting basics,
+package installation, and system administration tasks. Built a strong foundation in open-source environments,
+improving skills in troubleshooting, automation, and server management..
+◦ Wireshark: Gained hands-on experience using Wireshark for network packet analysis, traffic monitoring, and
+protocol inspection. Learned how to capture live network data, filter packets, analyze protocols like
+TCP/UDP/HTTP, and identify network issues. Developed strong skills in troubleshooting connectivity problems,
+detecting anomalies, and understanding real-time data flow across networks.
+
+Projects
+• Campus Navigation System using python: Developed a Campus Navigation System using Python to guide
+students and visitors across campus efficiently. Implemented graph-based path-finding algorithms to determine the
+shortest and most accurate routes between locations. Integrated building search, map visualization, and facility
+information for a smoother user experience. Designed a simple and interactive interface to make navigation easy for new
+students and guests. This project improves campus accessibility and demonstrates practical use of Python for real-world
+problem-solving.
+• Smart Attendance Management System: Developed a Smart Attendance Management System in Java to automate
+daily attendance tracking. Implemented features for adding records, marking attendance, generating reports, and
+calculating percentages. Used OOP principles, Java Collections, and exception handling for clean and modular design.
+Integrated file handling/MySQL for storing and retrieving attendance data efficiently. This project strengthened my
+skills in Java programming, problem-solving, and real-world system development.
+
+Certification
+• Networking Basics Issued by Cisco: Completed the Cisco “Networking Basics” certification, covering core concepts
+like network devices, IP addressing, and connectivity. Built a strong foundation in how networks operate, troubleshoot,
+and securely transfer data.
+• Introduction to Cybersecurity Issued by Cisco: Completed the Cisco “Introduction to Cybersecurity”
+certification, gaining awareness of cyber threats, attacks, and modern security practices. Developed foundational skills in
+protecting networks, data, and systems using essential cybersecurity principles and defense strategies.
+
+Skills
+• Proficient: Linux, Networking, Wireshark, Data Structure and Algorithm
+• Comfortable: JAVA,Python, C
+
+
