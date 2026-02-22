@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useMemo, useState } from "react"
+import React, { useRef, useMemo, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Points, PointMaterial } from "@react-three/drei"
 import * as random from "maath/random/dist/maath-random.cjs"
@@ -77,13 +77,13 @@ function Stars({ theme }: StarsProps) {
     const ref = useRef<THREE.Group>(null)
 
     // Layer 1: Dense faint background (High density for depth)
-    const dust = useMemo(() => generateColoredStars(8000, 6), [])
+    const dust = useMemo(() => generateColoredStars(2000, 6), [])
 
     // Layer 2: Medium Stars
-    const stars = useMemo(() => generateColoredStars(3000, 4), [])
+    const stars = useMemo(() => generateColoredStars(800, 4), [])
 
     // Layer 3: Bright Gems
-    const gems = useMemo(() => generateColoredStars(500, 2.5), [])
+    const gems = useMemo(() => generateColoredStars(150, 2.5), [])
 
     const autoRot = useRef({ x: 0, y: 0 })
 
@@ -105,7 +105,7 @@ function Stars({ theme }: StarsProps) {
                 <PointMaterial
                     transparent
                     vertexColors
-                    size={0.003} // Sharp and small
+                    size={0.005} // Sharp and small
                     sizeAttenuation={true}
                     depthWrite={false}
                     opacity={0.4}
@@ -118,7 +118,7 @@ function Stars({ theme }: StarsProps) {
                 <PointMaterial
                     transparent
                     vertexColors
-                    size={0.006}
+                    size={0.009}
                     sizeAttenuation={true}
                     depthWrite={false}
                     opacity={0.7}
@@ -131,7 +131,7 @@ function Stars({ theme }: StarsProps) {
                 <PointMaterial
                     transparent
                     vertexColors
-                    size={0.012} // Sharp bright points
+                    size={0.018} // Sharp bright points
                     sizeAttenuation={true}
                     depthWrite={false}
                     opacity={0.9}
@@ -149,10 +149,16 @@ export function Scene() {
             {/* Deep gradient background for extra depth overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black via-[#050510] to-black opacity-90" />
 
-            <Canvas camera={{ position: [0, 0, 1] }}>
-                <Stars theme={theme} />
-                <ShootingStar />
-                <ShootingStar />
+            <Canvas
+                camera={{ position: [0, 0, 1] }}
+                dpr={typeof window !== 'undefined' ? Math.min(2, window.devicePixelRatio) : 1}
+                gl={{ antialias: false, powerPreference: "high-performance" }}
+            >
+                <React.Suspense fallback={null}>
+                    <Stars theme={theme} />
+                    <ShootingStar />
+                    <ShootingStar />
+                </React.Suspense>
 
                 <ambientLight intensity={0.1} />
             </Canvas>

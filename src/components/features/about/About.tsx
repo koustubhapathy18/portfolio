@@ -35,15 +35,14 @@ export function About() {
                             key={stat.label}
                             initial={{
                                 opacity: 0,
-                                x: index === 0 ? -100 : index === 2 ? 100 : 0,
-                                y: index === 1 ? 100 : 0
+                                y: 30
                             }}
-                            whileInView={{ opacity: 1, x: 0, y: 0 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
                             whileHover={{ y: -5, transition: { duration: 0.2 } }}
                         >
-                            <SpotlightCard spotlightColor="rgba(0, 200, 255, 0.25)" className="h-full flex flex-col items-center justify-center text-center p-6 bg-background/60 backdrop-blur-md border border-white/10 shadow-lg hover:shadow-primary/20 transition-all duration-300 group">
+                            <SpotlightCard spotlightColor="rgba(0, 200, 255, 0.25)" className="h-full flex flex-col items-center justify-center text-center p-6 bg-background/80 backdrop-blur-sm border border-white/10 shadow-lg hover:shadow-primary/20 transition-all duration-300 group">
                                 <h3 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600 mb-2 group-hover:scale-105 transition-transform">{stat.value}</h3>
                                 <p className="text-muted-foreground font-medium">{stat.label}</p>
                             </SpotlightCard>
