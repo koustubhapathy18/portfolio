@@ -18,6 +18,8 @@ CONTEXT DATA:
 ${JSON.stringify(resumeData, null, 2)}
 `;
 
+export const runtime = 'edge'; // Vercel often requires edge runtime for AI SDKs
+
 export async function POST(req: Request) {
     if (!process.env.GEMINI_API_KEY) {
         return new Response(JSON.stringify({
@@ -29,18 +31,15 @@ export async function POST(req: Request) {
     try {
         const { messages } = await req.json();
 
-        // Extract the latest user message
-        const lastMessage = messages[messages.length - 1].text;
+        // Format the entire conversation into a single prompt for context
+        const conversationContext = messages.map((msg: any) =>
+            `${msg.sender === 'user' ? 'User' : 'Assistant'}: ${msg.text}`
+        ).join('\n\n');
 
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-        // Use system instruction to enforce the rigid persona
-        const chat = model.startChat({
-            systemInstruction: SYSTEM_PROMPT,
-            history: messages.slice(0, -1).map((msg: any) => ({
-                role: msg.sender === 'user' ? 'user' : 'model',
-                parts: [{ text: msg.text }],
-            })),
+        const result = await model.generateContent({
+            contents: [{ role: "user", parts: [{ text: `${SYSTEM_PROMPT}\n\nHere is the conversation history so far:\n${conversationContext}\n\nProvide the next Assistant response based strictly on the rules above.` }] }],
             generationConfig: {
                 temperature: 0.2, // Low temperature for stability and less hallucination
                 topK: 40,
@@ -49,17 +48,16 @@ export async function POST(req: Request) {
             },
         });
 
-        const result = await chat.sendMessage(lastMessage);
         const responseText = result.response.text();
 
         return new Response(JSON.stringify({ response: responseText }), {
             headers: { 'Content-Type': 'application/json' },
         });
-    } catch (error) {
-        console.error("Chat API Error:", error);
+    } catch (error: any) {
+        console.error("FULL ERROR:", error.message, error.stack, error);
         return new Response(JSON.stringify({
             error: "Internal Server Error",
-            message: "I seem to be experiencing slight interference right now. Please try again or contact Koustubha directly."
+            message: `I seem to be experiencing slight interference right now. Error Details: ${error.message}`
         }), { status: 500 });
     }
 }
