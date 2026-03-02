@@ -44,7 +44,7 @@ export const ChatWindow = ({ messages, sendMessage, isTyping, onClose, suggested
                         <Bot className="w-5 h-5 text-blue-400" />
                     </div>
                     <div>
-                        <h3 className="font-semibold text-slate-100 text-sm">Lumina</h3>
+                        <h3 className="font-semibold text-slate-100 text-sm">Megron</h3>
                         <p className="text-xs text-slate-400">Intelligence Core</p>
                     </div>
                 </div>

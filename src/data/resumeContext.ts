@@ -58,8 +58,8 @@ export const resumeData = {
   hackathons: [
     {
       title: "Web Development Competition - FESTRONIX 2K26",
-      role: "Winner (1st Place as Team Luminary)",
-      date: "Feb 27, 2026"
+      role: "Winner (1st Place as Team Megron)",
+      date: "Feb 2026"
     }
   ]
 };
