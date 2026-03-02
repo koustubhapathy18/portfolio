@@ -57,7 +57,10 @@ export const ChatWindow = ({ messages, sendMessage, isTyping, onClose, suggested
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 relative scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+            <div
+                className="flex-1 overflow-y-auto overscroll-contain p-4 space-y-4 relative scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent"
+                data-lenis-prevent
+            >
                 {messages.map((msg, idx) => (
                     <motion.div
                         key={msg.id}
