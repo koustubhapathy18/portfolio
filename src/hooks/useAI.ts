@@ -12,7 +12,7 @@ export const useAI = () => {
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 'init-1',
-            text: "System Online. Welcome to Koustubha's Neural Link. How may I assist you?",
+            text: "Lumina Online. Welcome. I am Koustubha's Intelligence Core. How may I assist you?",
             sender: 'ai',
             timestamp: new Date()
         }
