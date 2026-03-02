@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getAIResponse, suggestedQuestions } from '@/data/resumeContext';
+import { suggestedQuestions } from '@/data/resumeContext';
 
 export interface Message {
     id: string;
@@ -32,21 +32,46 @@ export const useAI = () => {
             timestamp: new Date()
         };
 
-        setMessages(prev => [...prev, userMsg]);
+        const newMessages = [...messages, userMsg];
+        setMessages(newMessages);
         setIsTyping(true);
 
-        // Simulate network delay for "AI thinking"
-        setTimeout(() => {
-            const response = getAIResponse(text);
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: newMessages })
+            });
+
+            const data = await response.json();
+
+            let responseText = data.response;
+
+            // Handle missing API key or server error gracefully
+            if (!response.ok) {
+                responseText = data.message || "My connection to the mainframe is currently unstable. Please configure the GEMINI_API_KEY.";
+            }
+
             const aiMsg: Message = {
                 id: (Date.now() + 1).toString(),
-                text: response,
+                text: responseText,
                 sender: 'ai',
                 timestamp: new Date()
             };
+
             setMessages(prev => [...prev, aiMsg]);
+        } catch (error) {
+            console.error("Failed to fetch AI response:", error);
+            const errorMsg: Message = {
+                id: (Date.now() + 1).toString(),
+                text: "My neural link is currently offline. Please try again later or contact Koustubha directly via email.",
+                sender: 'ai',
+                timestamp: new Date()
+            };
+            setMessages(prev => [...prev, errorMsg]);
+        } finally {
             setIsTyping(false);
-        }, 1500); // 1.5s delay
+        }
     };
 
     return {

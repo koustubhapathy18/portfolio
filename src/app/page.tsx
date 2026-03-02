@@ -5,6 +5,7 @@ import { Experience } from "@/components/features/experience";
 import { Projects } from "@/components/features/projects";
 import { Education } from "@/components/features/education";
 import { Contact } from "@/components/features/contact";
+import { Hackathons } from "@/components/features/hackathons";
 import { SpaceAudio } from "@/components/audio/SpaceAudio";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <Skills />
       <Experience />
       <Projects />
+      <Hackathons />
       <Contact />
     </div>
   );

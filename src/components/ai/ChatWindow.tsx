@@ -72,9 +72,9 @@ export const ChatWindow = ({ messages, sendMessage, isTyping, onClose, suggested
                             </div>
                         )}
 
-                        <div className={`max-w-[85%] p-3.5 rounded-2xl text-sm leading-relaxed ${msg.sender === 'ai'
-                                ? 'bg-slate-800/50 text-slate-200 rounded-tl-none'
-                                : 'bg-blue-600 text-white rounded-tr-none'
+                        <div className={`max-w-[85%] p-3.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${msg.sender === 'ai'
+                            ? 'bg-slate-800/50 text-slate-200 rounded-tl-none'
+                            : 'bg-blue-600 text-white rounded-tr-none'
                             }`}>
                             {msg.text}
                         </div>

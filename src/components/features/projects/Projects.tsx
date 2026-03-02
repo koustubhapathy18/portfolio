@@ -38,7 +38,7 @@ export function Projects() {
                             className="h-full"
                         >
                             <div className="h-full">
-                                <SpotlightCard className="h-full flex flex-col border-primary/20 bg-card/50 backdrop-blur-sm">
+                                <SpotlightCard spotlightColor="rgba(0, 200, 255, 0.25)" className="h-full flex flex-col border-primary/20 bg-card/50 backdrop-blur-sm">
                                     <CardHeader>
                                         <CardTitle className="text-xl mb-2">{project.title}</CardTitle>
                                         <div className="flex flex-wrap gap-2 mb-4">
