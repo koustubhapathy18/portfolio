@@ -35,7 +35,7 @@ export const hackathons: HackathonItem[] = [
             "Won 1st place and the cash prize as Team Luminary, building a polished web application under competitive time constraints that impressed the judges across design, functionality, and code quality.",
         placement: "1st",
         techStack: ["HTML", "CSS", "JavaScript", "React"],
-        date: "Mar 2026",
+        date: "Feb 27, 2026",
         teamSize: 3,
         teammates: ["Koustubha Pathy", "Sibani Bisoyi", "Jagan Kumar Swain"]
     },
